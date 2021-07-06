@@ -68,8 +68,7 @@ module.exports = {
         if (materia.length == 0) {
             res.render('error', {message: "Materia no encontrada", error:{}});
         }
-
-        const listado = await bd.query('SELECT matricula.id_matricula, alumno.id_alumno, alumno.nombre, alumno.apellido, AVG(nota.nota) as nota FROM matricula INNER JOIN materia ON matricula.codigo = materia.codigo INNER JOIN alumno ON matricula.id_alumno = alumno.id_alumno INNER JOIN entorno.nota ON entorno.matricula.id_matricula = nota.id_matricula WHERE materia.codigo = ? GROUP BY entorno.matricula.id_alumno', [codigo]);
+        const listado = await bd.query('SELECT matricula.id_matricula, alumno.id_alumno, alumno.nombre, alumno.apellido, AVG(nota.nota) as nota FROM matricula INNER JOIN materia ON matricula.codigo = materia.codigo INNER JOIN alumno ON matricula.id_alumno = alumno.id_alumno LEFT JOIN nota ON matricula.id_matricula = nota.id_matricula WHERE materia.codigo = ? GROUP BY matricula.id_alumno;', [codigo]);
         if (!listado) {
             res.send('error');
         }
