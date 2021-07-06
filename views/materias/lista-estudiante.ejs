@@ -1,8 +1,10 @@
 <%-include ../layouts/header.ejs %>
     <div class="container mx-auto">
-        <%if (materia.length>0) { %>
+        <%if (listado.length>0) { %>
             <br/> 
             <h2 class="text-center">Lista de estudiantes inscritos </h2>
+            <br/>
+            <h3 class="text-center"><b><%= materia.titulo %> - <%= materia.codigo %></b></h3>
             <br/>
                 
             <div class="row align-items-center">
@@ -13,17 +15,21 @@
                                 <th class="bgb"><strong> N° </strong></th>
                                 <th class="bgb"><strong> Nombre </strong> </th>
                                 <th class="bgb"><strong> Apellido </strong></th>
-                                <th class="bgb"><strong> Materia</strong></th>
+                                <th class="bgb"><strong> Nota Acumulada </strong></th>
+                                <th class="bgb"><strong> Acciones </strong></th>
                             </tr>
                         </thead>
             
                         <tbody>
-                            <% for( let i= 0; i < materia.length; i++ ) { %>
+                            <% for( let i= 0; i < listado.length; i++ ) { %>
                                 <tr>
                                     <td> <%=i+1%> </td>
-                                    <td> <%=materia[i].nombre%> </td>
-                                    <td> <%=materia[i].apellido%> </td>
-                                    <td> <%=materia[i].titulo%> </td>
+                                    <td> <%=listado[i].nombre%> </td>
+                                    <td> <%=listado[i].apellido%> </td>
+                                    <td> <%= Math.round(listado[i].nota  * 100) / 100%>  </td>
+                                    <td>
+                                        <a href="/materias/notas-estudiante/<%=listado[i].id_matricula %>" class="btn btn-warning"> Editar</a>
+                                    </td>
                                 </tr>
                             <% } %>
                         </tbody>
