@@ -13,12 +13,23 @@
 
                             <div class="mb-3">
                             <label for="formGroupExampleInput" class="form-label">Año Academico</label>
-                            <input type="text" class="form-control" name="academico" value="<%=materia.academico %>" placeholder="Cuarto o Quinto">
+                            <select class="form-control" name="academico">
+                                <% if (materia.academico == 'Cuarto' ) { %>
+                                    <option value="Cuarto" selected>Cuarto</option>
+                                <% } else { %>
+                                    <option value="Cuarto">Cuarto</option> 
+                                <% } %>
+                                <% if (materia.academico == 'Quinto' ) { %>
+                                    <option value="Quinto" selected>Quinto</option>
+                                <% } else { %>
+                                    <option value="Quinto">Quinto</option>
+                                <% } %>
+                            </select> 
                             </div>
 
                             <div class="mb-3">
                             <label for="formGroupExampleInput2" class="form-label">Describe la Materia</label>
-                            <textarea name="descripcion" value="<%=materia.descripcion %>"class="form-control" rows="2" placeholder="Describa la Materia."></textarea>
+                            <textarea name="descripcion" class="form-control" rows="2" placeholder="Describa la Materia."><%=materia.descripcion %></textarea>
                             </div>
 
                             <div class="form-group">
