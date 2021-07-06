@@ -105,7 +105,7 @@ module.exports = {
     },
 
     lista: async (req, res) => {
-        const conexion = await bd.query('SELECT matricula.id_matricula, materia.codigo, materia.titulo FROM matricula INNER JOIN materia ON matricula.codigo = materia.codigo');
+        const conexion = await bd.query('SELECT matricula.id_matricula, materia.codigo, materia.titulo FROM matricula INNER JOIN materia ON matricula.codigo = materia.codigo where matricula.id_alumno = ?', [req.user.id_alumno]);
         res.render('materias/lista.ejs', { materia: conexion });
     }
 
