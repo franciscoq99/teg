@@ -3,15 +3,15 @@ $(function () {
     const socket = io();
     // obteniendo los elementos del DOM
 
-    const $Form= document.getElementById('form');
-    const $messageBox=document.getElementById('input');
-    const $actions= document.getElementById('actions');
-    const $chat=document.getElementById('chat');
-    // const users= user.nombre;
+    const $Form= $('#form');
+    const $messageBox=$('#input');
+    const $actions= $('#actions');
+    const $chat=$('#chat');
+    
 
 
     // eventos
-    $Form.addEventListener('submit', function(e) {
+    $Form.submit( e => {
     e.preventDefault();
     if ($messageBox.value) {
       socket.emit('send message', $messageBox.value);

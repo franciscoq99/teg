@@ -127,14 +127,13 @@ module.exports = {
             await bd.query('INSERT INTO matricula set ?', [newmateria]);
             res.redirect('/materias/lista');
         }
-   
+
         req.flash('error', 'Esta materia ya fue inscrita anteriormente');
         res.redirect('/materias/add')
     },
 
     addNotas: async (req, res) => {
         const { nota, asunto, id_matricula } = req.body;
-       
         const newnota = {
             id_matricula,
             nota,

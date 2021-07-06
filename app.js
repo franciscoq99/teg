@@ -35,7 +35,7 @@ app.set('public', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
 //middlewares
 
-app.use(session({
+app.use(session({ 
     secret:'secret', 
     resave: false,
     saveUninitialized: false,
@@ -56,7 +56,7 @@ app.use((req,res,next)=>{
   app.locals.success= req.flash('success');
   app.locals.message = req.flash('message');
   app.locals.user= req.user; 
-  next();
+  next(); 
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
