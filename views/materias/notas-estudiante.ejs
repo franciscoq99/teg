@@ -1,0 +1,73 @@
+<%-include ../layouts/header.ejs %>
+    <div class="container mx-auto">
+            <br/> 
+            <h2 class="text-center">Notas del alumno </h2>
+            <br/>
+            <h3 class="text-center"><b><%= alumno.nombre %> <%= alumno.apellido %> - <%= materia.titulo %></b></h3>
+            <br/>
+                
+            <div class="row align-items-center">
+                <div class="col-md-8 mx-auto">
+                    <%if (listado.length>0) { %>
+                        <table class=" table table-bordered border-primary table-light table-striped shadow rounded">
+                            <thead class="thead-dark">
+                                <tr >
+                                    <th class="bgb"><strong> N° </strong></th>
+                                    <th class="bgb"><strong> Asunto </strong> </th>
+                                    <th class="bgb"><strong> Nota </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% let acumulado = 0;  
+                                for( let i= 0; i < listado.length; i++ ) { %>
+                                    <tr>
+                                        <td> <%=i+1%> </td>
+                                        <td> <%=listado[i].asunto%> </td>
+                                        <td> <%=listado[i].nota%> </td>
+                                    </tr>
+                                <% acumulado += listado[i].nota; 
+                                } %>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td><strong>Promedio</strong></td>
+                                    <td><strong><%= Math.round((acumulado / listado.length) * 100) / 100%></strong></td>
+                                </tr>
+                              </tfoot>
+                        </table>
+                    <%} else {%>
+                        <div class="card card-body text-center">
+                            <p><strong>No hay notas agregadas</strong></p>
+                            <a href="/profile" class="btn btn-danger">volver</a>
+                        </div>
+                    <%} %>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <div class="card shadow p-3 mb-4 bg-body rounded">
+                        <div class="card-body">
+                            <form action="/materias/add-nota" method="POST">
+    
+                                <div class="mb-3">
+                                <label for="formNotas" class="form-label">Asunto</label>
+                                <input type="text" class="form-control" name="asunto" placeholder="Ingrese Asunto.">
+                                </div>
+    
+                                <div class="mb-3">
+                                <label for="formNotas" class="form-label">Nota</label>
+                                <input type="number" class="form-control" name="nota" min=0 max=20>
+                                </div>
+
+                                <input type="hidden" name="id_matricula" value=<%=matricula.id_matricula %>>
+
+    
+                                <div class="form-group">
+                                <button class="btn btn-success position-center "> Guardar </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<%- include ../layouts/footer.ejs %>

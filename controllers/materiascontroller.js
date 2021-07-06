@@ -63,18 +63,46 @@ module.exports = {
 
     listaestudiante: async (req, res) => {
         const { codigo } = req.params;
-        const existeMateria = await bd.query('SELECT * FROM materia where codigo = ?', [codigo]);
+        const materia = await bd.query('SELECT * FROM materia where codigo = ?', [codigo]);
 
-        if (existeMateria.length == 0) {
+        if (materia.length == 0) {
             res.render('error', {message: "Materia no encontrada", error:{}});
         }
 
-        const materia = await bd.query('SELECT materia.codigo, materia.titulo, alumno.nombre, alumno.apellido FROM matricula INNER JOIN materia ON matricula.codigo = materia.codigo INNER JOIN alumno ON matricula.id_alumno = alumno.id_alumno WHERE materia.codigo = ?', [codigo]);
-        if (!materia) {
+        const listado = await bd.query('SELECT matricula.id_matricula, alumno.id_alumno, alumno.nombre, alumno.apellido, AVG(nota.nota) as nota FROM matricula INNER JOIN materia ON matricula.codigo = materia.codigo INNER JOIN alumno ON matricula.id_alumno = alumno.id_alumno INNER JOIN entorno.nota ON entorno.matricula.id_matricula = nota.id_matricula WHERE materia.codigo = ? GROUP BY entorno.matricula.id_alumno', [codigo]);
+        if (!listado) {
             res.send('error');
         }
+        res.render('materias/lista-estudiante', { materia: materia[0], listado: listado })
+    },
 
-        res.render('materias/lista-estudiante', { materia: materia })
+    notasestudiante: async (req, res) => {
+        const { id_matricula, } = req.params;
+
+        const matricula = await bd.query('SELECT * FROM matricula where id_matricula = ?', [id_matricula]);
+
+        if (matricula.length == 0) {
+            res.render('error', {message: "Registro no encontrado", error:{}});
+        }
+
+        const {id_alumno, codigo} = matricula[0];
+
+        const alumno = await bd.query('SELECT * FROM alumno where id_alumno = ?', [id_alumno]);
+        const materia = await bd.query('SELECT * FROM materia where codigo = ?', [codigo]);
+
+        if (alumno.length == 0) {
+            res.render('error', {message: "Alumno no encontrado", error:{}});
+        }
+
+        if (materia.length == 0) {
+            res.render('error', {message: "Materia no encontrada", error:{}});
+        }
+
+        const listado = await bd.query('SELECT nota.*, matricula.codigo, matricula.id_alumno FROM nota INNER JOIN matricula ON matricula.id_matricula = nota.id_matricula WHERE nota.id_matricula = ?', [id_matricula]);
+        if (!listado) {
+            res.send('error');
+        }
+        res.render('materias/notas-estudiante', { materia: materia[0], alumno: alumno[0], matricula: matricula[0], listado: listado })
     },
     // ----<<<>>>----- estudiante----<<<>>>>----
     add: async (req, res) => {
@@ -99,9 +127,26 @@ module.exports = {
             await bd.query('INSERT INTO matricula set ?', [newmateria]);
             res.redirect('/materias/lista');
         }
-        //res.render('error', {message: "Esta materia ya fue inscrita anteriormente", error:{}});
+   
         req.flash('error', 'Esta materia ya fue inscrita anteriormente');
         res.redirect('/materias/add')
+    },
+
+    addNotas: async (req, res) => {
+        const { nota, asunto, id_matricula } = req.body;
+       
+        const newnota = {
+            id_matricula,
+            nota,
+            asunto,
+        };
+
+        await bd.query('INSERT INTO nota set ?', [newnota]);
+        res.redirect('/materias/notas-estudiante/' + id_matricula);
+        
+
+        req.flash('error', 'No se pudo agregar la nota');
+        res.redirect('/materias/notas-estudiante/' + id_matricula)
     },
 
     lista: async (req, res) => {
