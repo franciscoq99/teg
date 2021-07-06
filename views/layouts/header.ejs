@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entorno Virtual de Aprendizaje</title>
+
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/fontawesome/js/all.min.js">
+
+</head>
+<body>
+
+    <nav class=" navbar navbar-expand-lg navbar-light bg-primary bg-gradient text-dark">
+        <div class="container navbar-ancho">
+                <div class="collapse navbar-collapse navbar-ancho" id="navbarNav">
+                    <a class="navbar-brand" href="/">L.N.B.V</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <ul class="navbar-nav "> 
+                        <%if (!user) { %>
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item my-auto">
+                                <a href="/registrarse"class="nav-link">Registrarse</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/login"class="nav-link">Iniciar Sesion</a>
+                            </li>
+                        </ul>
+                        <% } else if (user.rol=='docente') { %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Materia
+                                </a>
+                                <ul class="dropdown-menu bg-secondary bg-gradient" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item " href="/materias/">Listado de materias</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item " href="/materias/crear">Crear materia</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Biblioteca
+                                </a>
+                                <ul class="dropdown-menu bg-secondary bg-gradient" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item " href="/biblioteca/cuarto">Cuarto</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item " href="/biblioteca/quinto">Quinto</a></li>
+                                </ul>
+                            </li> 
+                            <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/chats">Mensajes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/logout"class="nav-link">Salir</a>
+                            </li>
+
+                            <%} else if(user.rol=='alumno') { %>
+                                <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Materias
+                                </a>
+                                <ul class="dropdown-menu bg-secondary bg-gradient" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item " href="/materias/lista">Listado de materias</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item " href="/materias/add">Inscribir materia</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Biblioteca
+                                </a>
+                                <ul class="dropdown-menu bg-secondary bg-gradient" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item " href="/biblioteca/cuarto">Cuarto</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item " href="/biblioteca/quinto">Quinto</a></li>
+                                </ul>
+                            </li> 
+                            <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/chats">Mensajes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/logout"class="nav-link">Salir</a>
+                            </li> 
+                            <%}%> 
+
+                        
+                    </ul>
+                </div>
+        </div>
+    </nav>
+    
+    

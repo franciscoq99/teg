@@ -1,0 +1,42 @@
+<%-include ../layouts/header.ejs %>
+    <div class="container mx-auto">
+        <%if (materia.length>0) { %>
+            <br/> 
+            <h2 class="text-center">Lista de estudiantes inscritos </h2>
+            <br/>
+                
+            <div class="row align-items-center">
+                <div class="col-md-10 mx-auto">
+                    <table class=" table table-bordered border-primary table-light table-striped shadow rounded">
+                        <thead class="thead-dark">
+                            <tr >
+                                <th class="bgb"><strong> N° </strong></th>
+                                <th class="bgb"><strong> Nombre </strong> </th>
+                                <th class="bgb"><strong> Apellido </strong></th>
+                                <th class="bgb"><strong> Materia</strong></th>
+                            </tr>
+                        </thead>
+            
+                        <tbody>
+                            <% for( let i= 0; i < materia.length; i++ ) { %>
+                                <tr>
+                                    <td> <%=i+1%> </td>
+                                    <td> <%=materia[i].nombre%> </td>
+                                    <td> <%=materia[i].apellido%> </td>
+                                    <td> <%=materia[i].titulo%> </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <%} else {%>
+            <div class="col-md-12 mx-auto">
+                <div class="card card-body text-center">
+                    <p><strong>No hay alumnos inscritos a la materia</strong></p>
+                    <a href="/profile" class="btn btn-danger">volver</a>
+                </div>
+            </div>
+        <%}%>
+    </div>
+<%- include ../layouts/footer.ejs %>

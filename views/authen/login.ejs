@@ -1,0 +1,44 @@
+<%- include ../layouts/header.ejs %>
+
+<div class="con">
+    <div class="contenedor-main">
+        <div class="caja-trasera">
+            <div class="caja-trasera-login-estudiante">
+                <h3>Iniciar sesion Estudiante</h3>
+                <button id="btn-iniciar-sesion-estudiante">Iniciar Sesion </button>
+            </div>
+
+            <div class="caja-trasera-login-docente">
+                <h3>Iniciar Sesion Docente </h3>
+                <button id="btn-iniciar-sesion-docente">Iniciar Sesion </button>
+            </div>
+        </div>
+
+        <div class="contenedor-login-register"> 
+            <!-- FORMULARIO DE LOGIN -->
+            <form action="/login-estudiante" method="POST" class="formulario-login-estudiante">
+                <h2>Iniciar Sesion</h2>
+                <h3>Estudiante</h3>
+                <input type="text" name="username" placeholder="Ingrese Usuario" required>
+                <input type="password" name="password" requered placeholder="Ingrese Contraseña">
+                <button>Entrar</button>
+                <% if (typeof message !== 'undefined' && message) {%>
+                    <p><%= message %></p>
+                <% } %>
+            </form> 
+            <!-- FORMULARIO DE LOGIN-->
+            <form action="/login-docente" method="POST" class="formulario-login-docente">
+                <h2>Iniciar Sesion</h2>
+                <h3>Docente</h3>
+                <input type="text" name="username" placeholder="Ingrese Usuario" required>
+                <input type="password" name="password" id="" requered placeholder="Ingrese Contraseña">
+                <button>Entrar</button>
+                <% if (typeof message !== 'undefined' && message) {%>
+                    <p><%= message %></p>
+                <% } %>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ../layouts/footer.ejs %>

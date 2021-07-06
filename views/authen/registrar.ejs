@@ -1,0 +1,41 @@
+<%- include ../layouts/header.ejs %>
+<div class="con">
+    <div class="contenedor-main">
+        <div class="caja-trasera">
+            <div class="caja-trasera-login-estudiante">
+                <h3>Inscribirse Estudiante</h3>
+                <button id="btn-iniciar-sesion-estudiante">Inscribirse</button>
+            </div>
+
+            <div class="caja-trasera-login-docente">
+                <h3>Registrarse Docente </h3>
+                <button id="btn-iniciar-sesion-docente">Registrarse </button>
+            </div>
+        </div>
+
+        <div class="contenedor-login-register"> 
+            <!-- FORMULARIO DE LOGIN -->
+            <form action="/signup-estudiante" method="POST" class="formulario-login-estudiante de">
+                <h2>Inscripcion Estudiante</h2>
+                <input type="text" name="nombre" placeholder="Ingrese nombre" required>
+                <input type="text" name="apellido" placeholder="Ingrese apellido" required>
+                <input type="text" name="email" placeholder="Ingrese email" required>
+                <input type="text" name="username" placeholder="Ingrese Usuario" required>
+                <input type="password" name="password" requered placeholder="Ingrese Contraseña">
+                <button>Entrar</button>
+            </form>
+            <!-- FORMULARIO DE LOGIN-->
+            <form action="/signup-docente" method="POST" class="formulario-login-docente de">
+                <h2>Registrarse Docente</h2>
+                <input type="text" name="nombre" placeholder="Ingrese nombre" required>
+                <input type="text" name="apellido" placeholder="Ingrese apellido" required>
+                <input type="text" name="email" placeholder="Ingrese email" required>
+                <input type="text" name="username" placeholder="Ingrese Usuario" required>
+                <input type="password" name="password" requered placeholder="Ingrese Contraseña">
+                <button>Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include ../layouts/footer.ejs %>

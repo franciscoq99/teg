@@ -1,0 +1,32 @@
+<%- include ../layouts/header.ejs %>
+<div class="container p-5 ">  
+    <div class="row align-items-center">
+        <div class="col-md-8 mx-auto">
+                <div class="card shadow p-2 mb-4 bg-body rounded text-center border border-5">
+                    <div class="card-body">
+                        <form id="agg-materia" action="/materias/add" method="POST">
+                            <div class="mb-3">
+                            <label for="formGroupExampleInput" class="form-label"><strong>Codigo de la Materia</strong></label>
+                            <select class="form-control" name="codigo">
+                                <% for (let i=materias.length; i--;) { %>
+                                    <option value="<%= materias[i].codigo %>" ><%= materias[i].titulo %></option>
+                                <% } %>
+                            </select>
+                            </div>
+
+                            <div class="form-group">
+                                <a href="/materias/lista" class="btn btn-danger">cancelar</a>
+                                <button class="btn btn-success position-center "> Unirse </button>
+                            </div>
+                        </form>
+                        <% if (typeof error !== 'undefined' && error) {%>
+                            <p><%= error %></p>
+                        <% } %>
+                    </div>
+                </div> 
+                
+            </div>
+        </div>
+    </div>
+</div>
+<%- include ../layouts/footer.ejs %>

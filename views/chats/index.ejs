@@ -1,0 +1,28 @@
+<%- include ../layouts/header.ejs %>
+<div class="container">
+    <div class="col-md-6 mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>chats </h3>
+            </div>
+            <div id="actions"></div>
+            <div class="card-body">
+            <ul id="chat">
+                
+            </ul>
+            </div>
+
+            <form id="form" class="card-footer">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="input">
+                    <div class="input-group-append">
+                    <button type="submit" class="btn bn">
+                        <i class="fas fa-location-arrow"></i> Enviar
+                    </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include ../layouts/footer.ejs %>

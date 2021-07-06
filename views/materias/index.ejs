@@ -1,0 +1,46 @@
+<%-include ../layouts/header.ejs %>
+        <div class="container mx-auto">
+            <%if (materia.length>0) { %>
+                <br/> 
+            <a href="/materias/crear" class="btn btn-success bgb" type="button">Crear Materia</a>
+            <br/>
+            <br/>
+            <table class=" table table-bordered border-primary table-light table-striped shadow rounded">
+                <thead class="thead-dark">
+                    <tr class="justify-content-center text-align-center">
+                        <th class="bgb"><strong> N° </strong></th>
+                        <th class="bgb"><strong> Codigo </strong></th>
+                        <th class="bgb"><strong> Nombre </strong> </th>
+                        <th class="bgb"><strong> Año </strong></th>
+                        <th class="bgb"><strong> Descripcion</strong></th>
+                        <th class="bgb"><strong> Acciones</strong></th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    <% for( let i= 0; i < materia.length; i++ ) { %>
+                        <tr>
+                            <td> <%=i+1%> </td>
+                            <td> <a href="/materias/lista-estudiante/<%=materia[i].codigo %>"><%=materia[i].codigo%></a></td>
+                            <td> <%=materia[i].titulo%> </td>
+                            <td> <%=materia[i].academico%> </td>
+                            <td> <%=materia[i].descripcion%> </td>
+                            <td class=" d-flex justify-content-center"> 
+                                <a href="/materias/editar/<%=materia[i].codigo %>" class="btn btn-warning"> Editar</a>
+                                ||
+                                <a href="/materias/eliminar/<%=materia[i].codigo %>" class="btn btn-danger"> Borrar</a>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <%}else { %>
+                <div class="col-md-4 mx-auto">
+                    <div class="card card-body text-center">
+                        <p>No existe materia cradas aun.</p>
+                        <a href="/materias/crear" class=" btn btn-success text-uppercase">Crear una!</a>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+            <%- include ../layouts/footer.ejs %>
